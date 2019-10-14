@@ -1,0 +1,139 @@
+---
+title: "Introdución a R"
+author: "Juan Zuloaga, PhD"
+date: "14/10/2019"
+output:
+  html_document:
+    toc: true
+---
+
+## Instalando R
+
+Lo primero que tiene que hacer es bajar la última versión de R (https://www.r-project.org/)
+
+R es un software de libre acceso que le permitirá hacer análisis estadísticos, modelamiento, simulaciones, presentación de gráficos. Además, podrá tener acceso a innumerable aplicaciones en varias areas de la biología. Por ejemplo, analisis filogenéticos, biología de poblaciones y comunidades, ecología del paisaje, macroecología, etc.
+
+Pero tal vez lo más importante es que sus procesos se pueden automatizar y reproducir.
+
+## Instalando RStudio 
+
+RStudio es un ambiente integrado de desarrollo (IDE, por sus siglas en inglés). Esto quiere decir que podrá tener más control y visualización de su trabajo. Podra ver sus códigos, el resultado de los mismos, ver gráficas, mapas, tablas, el historial de su proceso, etc. 
+
+Instale la versión de libre uso (open source).
+https://rstudio.com/
+
+Cuando usted inicializa RStudio inmediatamete se carga R.
+
+RStudio posee cuatro ventanas principales. Ejecutemos este código para explicarlas:
+```{r eval=FALSE}
+library(maps)
+map("world")
+```
+**_Tenga en cuenta que_** para ejecutar un código en R debe localizar el cursor en la línea que quiere ejecutar (si son varias líneas, debe seleccionar todas las líneas) y luego puede utilizar estas dos teclas Ctrl+R. Tambien puede hacer click en el boton 'run' en la parte superior derecha del Editor.
+
+El resultado en RStudio es:
+
+![](C:/Juan/Fig/RStudio_screen_example.jpg)
+
+## Instalando los paquetes
+
+Los paquetes ('packages' en inglés) son grupos de funciones, datos y/o códigos en un formato estandard que le permitirá resolver sus problemas estadíticos, modelación, simulación, etc.
+
+Hay mas de 8000 paquetes que le pueden facilitar su investigación (see [here](https://sites.google.com/site/juangerardozuloaga/r_stuff/scripts/getting-started-with-r)).
+
+Por ejemplo *raster* es un paquete que le permite analizar información en formato de pixeles (gridded). 
+
+Los paquetes que usted necesite deben ser instalados en R para ser utilizados. Por ejemplo, si usted necesita el paquete 'raster:
+```{r eval=FALSE}
+install.packages("raster")
+```
+**_Tenga en cuenta que_** todas las letras de la funcion <span style="color:red">raster</span> debe estar dentro de signos de exclamación
+
+Una vez el paquete es instalado, éste debe ser cargado usando la función  <span style="color:red">library</span>.
+```{r eval=FALSE}
+library(raster)
+```
+**_Tenga en cuenta que_** todas las letras de la funcion <span style="color:red">library</span> están en minúscula
+
+Los paquetes tambien los puede instalar usando el menu de RStudio.
+
+![](C:/Juan/Fig/installpackages.jpg)
+
+El paquete tambien puede ser cargado para ser utilizado, utilizando en menu de la ventana derecha inferior. Seleccione la pestaña 'packages' y busque 'raster', luego haga click y verá como en la Consola aparece el mensaje 'library(raster)' y en la ventana de "History aparecerá lo mismo. Esto quiere decir que este paquete 'raster' está cargado.
+
+![](C:/Juan/Fig/library.jpg)
+
+## Definiendo el directorio de trabajo
+
+Si va a empezar un proyecto es bueno que defina su directorio. De esta forma, R sabrá donde salvar o buscar sus archivos.
+
+Para saber cual es el directorio que R tiene por defecto, utilice 'getwd()'(getting working directory)
+```{r eval = FALSE}
+getwd()
+[1] "C:/Users"
+```
+En este caso el folder por defecto es llamado 'Users'.
+
+Ahora vamos a crear un folder directamente en el disco C:\.
+
+Primero, ubiquemonos en el disco 'C:\', utilizando el comando setwd (set working directory), los dos puntos seguidos indican moverse un folder hacia atrás.
+```{r eval=FALSE}
+setwd('..')
+getwd()
+[1] "C:/"
+```
+
+Ahora creemos un folder en C:\
+```{r eval=FALSE}
+create.dir(proj1)
+```
+**_Es muy importante que_** use nombres cortos para sus folders y archivos. Evite espacios y caracteres complicados dentro del mismo.
+
+o puede utilizar
+```{r eval=FALSE}
+create.dir("C:\proj1")
+```
+
+Usted obtendrá un mensaje como estos:
+<span style="color:red">Error: '\p' is an unrecognized escape in character string starting ""C:\p"</span>
+
+Es muy importante que usted utilice de ahora en adelante este "/" en vez de este "\", que es el que utiliza windows explorer como ruta para describir sus archivos.
+```{r eval=FALSE}
+create.dir("C:/proj1")
+```
+
+Como alternativa usted puede utilizar dos "\\" y obtendrá el mismo resultado
+```{r eval=FALSE}
+create.dir("C:\\proj1")
+```
+
+Si usted lista los archivos que están en su directorio principal encontrará su folder 'proj1' junto con los demas folders en su directorio C:\.
+```{r eval=FALSE}
+list.files()
+```
+**_Es muy importante que_** usted defina un folder desde el inicio de su proyecto. R buscará y salvará sus archivos en este folder. 
+
+Es muy importante que usted defina los principales subfolders dentro del proyecto. Por ejemplo, usted puede crear un subfolder para guardar todos sus archivos originales (tablas, mapas, etc). De la misma forma un subfolder para guardar procesos intermedios y otro para los resultados finales.
+```{r eval=FALSE}
+setwd("C:\\proj1")
+create.dir("original")
+```
+
+<span style="color:blue">Nota final</span>
+
+Ha este punto se habrá dado cuenta que la palabra antes del parentesis corresponde a una función.
+
+Por ejemplo list.files() es una función que lista los archivos que se encuentran en el directorio principal.Si dentro del parentesis no hay ninguna especificación, R buscará en el directorio principal.
+
+En cualquier momento puede utilizar la función help para tener ayuda. El símbolo de pregunta '?' seguido de la función le dará los mismo resultados
+
+```{r eval=FALSE}
+help(list.files)
+or 
+?list.files
+```
+
+![](C:/Juan/Fig/help.jpg)
+
+<span style="color:blue">Bueno, creo que ya está list@ para empezar esta aventura en R!!</span>
+
